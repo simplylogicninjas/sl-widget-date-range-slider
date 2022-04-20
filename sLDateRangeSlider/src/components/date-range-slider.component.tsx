@@ -127,15 +127,19 @@ const DateRangeSlider = (props: DateRangeSliderProps) => {
                     </Tracks>
                 )}
 
-                <Ticks values={ticks}>
-                    {({ ticks }) => (
-                        <React.Fragment>
-                            {ticks.map(tick => (
-                                <SliderTick key={tick.id} tick={tick} count={ticks.length} format={formatTick} />
-                            ))}
-                        </React.Fragment>
-                    )}
-                </Ticks>
+                {
+                    props.showTicks && (
+                        <Ticks values={ticks}>
+                            {({ ticks }) => (
+                                <React.Fragment>
+                                    {ticks.map(tick => (
+                                        <SliderTick key={tick.id} tick={tick} count={ticks.length} format={formatTick} />
+                                    ))}
+                                </React.Fragment>
+                            )}
+                        </Ticks>
+                    )
+                }
             </Slider>
         </div>
     );

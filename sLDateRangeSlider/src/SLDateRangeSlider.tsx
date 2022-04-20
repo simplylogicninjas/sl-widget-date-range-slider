@@ -48,6 +48,7 @@ export function SLDateRangeSlider(props: SLDateRangeSliderContainerProps): React
                 tickIntervalUnit: props.tickIntervalUnit,
                 stepUnit: props.stepUnit,
                 stepSize: props.stepSize,
+                showTicks: props.showTicks,
                 tickFormat,
                 tooltipFormat: props.tooltipFormat,
                 lockStep: props.lockStep,

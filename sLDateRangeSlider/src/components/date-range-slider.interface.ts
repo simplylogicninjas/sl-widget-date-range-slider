@@ -20,6 +20,7 @@ export interface DateRangeSliderProps {
     disabled: boolean;
     stepUnit: TimeUnit;
     stepSize: number;
+    showTicks: boolean;
     tickIntervalUnit: TimeUnit;
     tickFormat: string;
     tooltipFormat?: string;
