@@ -1,5 +1,5 @@
 # sl-widget-date-range-slider
-Date range slider widget
+Date range slider to easily select a date range.
 
 ## 1\. Description
 
@@ -25,7 +25,7 @@ You can use this widget to display date ranges and select dates in a slider. The
 * Ability to add onChange events on the slider attributes.
 
 ### 2.2 Modeler example
-<img src="https://raw.githubusercontent.com/simplylogicninjas/sl-widget-date-range-slider/main/docs/images/slider_browser_example.png" width="600">
+<img src="https://raw.githubusercontent.com/simplylogicninjas/sl-widget-date-range-slider/main/docs/images/slider_modeler_example.png" width="600">
 
 ### 2.3 Configuration example
 #### 2.3.1 General settings
