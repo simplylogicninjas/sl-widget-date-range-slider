@@ -6,7 +6,7 @@ Date range slider to easily select a date range.
 You can use this widget to display date ranges and select dates in a slider. The date range slider can hold multiple handles. It allows you to set the minimum date and maximum date dynamicly from an attribute and configure on change actions. It comes with a tooltip and custom time formatting. Additionally it allows you to disable time intervals and stepsize.
 
 ### 1.1 Browser Examples
-<table><tbody><tr><td>Example 1</td><td>Example 2</td></tr><tr><td><img src="https://raw.githubusercontent.com/simplylogicninjas/sl-widget-date-range-slider/main/docs/images/slider_browser_example.png" width="400"></td><td><img src="https://raw.githubusercontent.com/simplylogicninjas/sl-widget-date-range-slider/main/docs/images/slider_browser_example_error.png" width="400"></td></tr></tbody></table>
+<table><tbody><tr><td>Within allowed range example</td><td>Range disabled example</td></tr><tr><td><img src="https://raw.githubusercontent.com/simplylogicninjas/sl-widget-date-range-slider/main/docs/images/slider_browser_example.png" width="400"></td><td><img src="https://raw.githubusercontent.com/simplylogicninjas/sl-widget-date-range-slider/main/docs/images/slider_browser_example_error.png" width="400"></td></tr></tbody></table>
 
 ## 2\. Usage
 
