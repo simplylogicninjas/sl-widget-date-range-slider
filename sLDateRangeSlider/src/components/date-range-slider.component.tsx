@@ -22,23 +22,31 @@ const DateRangeSlider = (props: DateRangeSliderProps) => {
         return format(new Date(ms), props.tickFormat);
     };
 
-    const onValueChange = () => {
-        handlesRef.current.forEach(handle => {
+    const onValueChange = (items: DateRangeSliderItem[]) => {
+        items.forEach(handle => {
             if (props.onChange) {
                 props.onChange(handle);
             }
         });
     };
 
-    const checkForRangeError = useCallback(() => {
-        if (disabledTracks?.length) {
-            const changedValues = handlesRef.current.map(it => it.value);
+    const checkForRangeError = useCallback(
+        (items: DateRangeSliderItem[]) => {
+            if (disabledTracks?.length) {
+                const changedValues = items.map(it => it.value);
+                const validated = disabledTracks.some(({ source, target }) =>
+                    validateValues(changedValues, source, target)
+                );
 
-            setRangeHasError(
-                disabledTracks.some(({ source, target }) => validateValues(changedValues, source, target))
-            );
-        }
-    }, [disabledTracks]);
+                setRangeHasError(validated);
+
+                return validated;
+            } else {
+                return false;
+            }
+        },
+        [disabledTracks]
+    );
 
     return (
         <div className={"slider"}>
@@ -54,15 +62,7 @@ const DateRangeSlider = (props: DateRangeSliderProps) => {
                 </Rail>
                 <Handles>
                     {({ handles, getHandleProps }) => {
-                        handles.forEach(handle => {
-                            const handleRef = handlesRef.current.find(it => it.handleId === handle.id);
-
-                            if (handleRef && handleRef.value !== handle.value) {
-                                onValueChange();
-                            }
-                        });
-
-                        handlesRef.current = handles.map((item, index) => {
+                        const handleItems = handles.map((item, index) => {
                             return {
                                 id: props.values[index].id,
                                 handleId: item.id,
@@ -70,7 +70,19 @@ const DateRangeSlider = (props: DateRangeSliderProps) => {
                             };
                         });
 
-                        checkForRangeError();
+                        const hasRangeError = checkForRangeError(handleItems);
+
+                        handles.forEach(handle => {
+                            const handleRef = handlesRef.current.find(it => it.handleId === handle.id);
+
+                            if (handleRef && handleRef.value !== handle.value) {
+                                if (!hasRangeError) {
+                                    onValueChange(handleItems);
+                                }
+                            }
+                        });
+
+                        handlesRef.current = handleItems;
 
                         return (
                             <React.Fragment>
@@ -127,19 +139,17 @@ const DateRangeSlider = (props: DateRangeSliderProps) => {
                     </Tracks>
                 )}
 
-                {
-                    props.showTicks && (
-                        <Ticks values={ticks}>
-                            {({ ticks }) => (
-                                <React.Fragment>
-                                    {ticks.map(tick => (
-                                        <SliderTick key={tick.id} tick={tick} count={ticks.length} format={formatTick} />
-                                    ))}
-                                </React.Fragment>
-                            )}
-                        </Ticks>
-                    )
-                }
+                {props.showTicks && (
+                    <Ticks values={ticks}>
+                        {({ ticks }) => (
+                            <React.Fragment>
+                                {ticks.map(tick => (
+                                    <SliderTick key={tick.id} tick={tick} count={ticks.length} format={formatTick} />
+                                ))}
+                            </React.Fragment>
+                        )}
+                    </Ticks>
+                )}
             </Slider>
         </div>
     );
